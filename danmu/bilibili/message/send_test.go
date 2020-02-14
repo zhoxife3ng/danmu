@@ -1,0 +1,21 @@
+package message
+
+import (
+	"fmt"
+	"testing"
+)
+
+func TestMsgLogin_PackMsg(t *testing.T) {
+	// {"uid":0,"roomid":21859078,"protover":2,"platform":"web","clientver":"1.10.1","type":2,"key":"WXFixprjQYaYrGHEk5KzzhBU3V4TdtmGxiQRjdTJCw1HTEUoCzn_xiaDwdXVINlmeSXn-CaIYDUmJRdvysD_6ji44PtrNqBDsq84z1ui1RhYBUeC"}
+	msgLogin := NewMsgLogin(0, 21859078, 2, 2, "web", "1.10.1", "WXFixprjQYaYrGHEk5KzzhBU3V4TdtmGxiQRjdTJCw1HTEUoCzn_xiaDwdXVINlmeSXn-CaIYDUmJRdvysD_6ji44PtrNqBDsq84z1ui1RhYBUeC")
+	res, err := msgLogin.PackMsg(ProtocolVersionNormal)
+	fmt.Printf("%x   %s\n", res, err)
+	// 000000e00010000100000007000000017b22756964223a302c22726f6f6d6964223a32313835393037382c2270726f746f766572223a322c22706c6174666f726d223a22776562222c22636c69656e74766572223a22312e31302e31222c2274797065223a322c226b6579223a22575846697870726a51596159724748456b354b7a7a6842553356345464746d47786951526a64544a437731485445556f437a6e5f7869614477645856494e6c6d6553586e2d4361495944556d4a5264767973445f366a6934345074724e714244737138347a3175693152685942556543227d
+}
+
+func TestMsgKeepLive_PackMsg(t *testing.T) {
+	msgKeepLive := NewMsgKeepLive("[object Object]")
+	res, err := msgKeepLive.PackMsg(ProtocolVersionNormal)
+	fmt.Printf("%x   %s\n", res, err)
+	// 0000001f0010000100000002000000015b6f626a656374204f626a6563745d
+}
